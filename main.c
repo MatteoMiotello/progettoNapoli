@@ -11,7 +11,7 @@ int prezzi[4][5] = {
 
 int Tagli[6] = {1, 2, 5, 10, 20, 50};
 
-int quantitaTagli[6] = {10, 10, 10, 2, 2, 2};
+int quantitaTagli[6] = {2, 0, 1, 1, 1, 1};
 
 int QuantitaProdotti[4][5] = {
         {50,  30,  50,  50,  40},
@@ -431,8 +431,10 @@ void calcolaResto(int importo) {
     }
 
     for (int i = 5; i >= 0; --i) {
-        resti[i] = resto / Tagli[i];
-        resto = resto % Tagli[i];
+        if ( quantitaTagli[i] >= resto/Tagli[i] ) {
+            resti[i] = resto / Tagli[i];
+            resto = resto % Tagli[i];
+        }
     }
 
     printf("\n\n********************************** \n");
@@ -440,6 +442,8 @@ void calcolaResto(int importo) {
     for (int i = 0; i < 6; ++i) {
         printf("%d pezzi da %d euro; \n", resti[i], Tagli[i]);
     }
+
+    sommaScontrino = 0;
 }
 
 
